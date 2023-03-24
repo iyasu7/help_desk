@@ -1,7 +1,7 @@
-<script setup>
-import Register from './views/Register.vue'
-</script>
-
 <template>
-  <Register/>
+  <router-view></router-view>
 </template>
+
+
+<script setup>
+</script>

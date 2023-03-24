@@ -61,7 +61,6 @@
     import { LockClosedIcon } from '@heroicons/vue/20/solid'
     import store from '../store'
     import { useRouter } from "vue-router"
-    import dashboard from '../views/Dashboard.vue'
 
 
     const router = useRouter();
@@ -74,13 +73,13 @@
 
 
 
-    function register() {
-      store.dispatch('register', user)
+    async function register() {
+      await store.dispatch('register', user)
       .then(()=>{
-        this.$router.push({
+        
+        router.push({
           name:'Dashboard'
         })
-        // console.log('promise returned');
       })
     }
 
