@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 import Login from "../views/Login.vue";
 import Dashboard from "../views/Dashboard.vue";
 import ClientList from "../pages/Client/ClientList.vue";
@@ -36,7 +36,7 @@ const routes = [
         // component: CmsLayout,
         meta: { requiresAuth: true },
         children: [
-            { path: "dashboard", name: "Dashboard", component: Dashboard },
+            { path: "/", name: "Dashboard", component: Dashboard },
             { path: "clientlist", name: "ClientList", component: ClientList },
             {
                 path: "createclient",
@@ -141,7 +141,7 @@ const routes = [
     },
 ];
 const router = createRouter({
-    history: createWebHashHistory(),
+    history: createWebHistory(),
     routes,
 });
 router.beforeEach((to, from, next) => {

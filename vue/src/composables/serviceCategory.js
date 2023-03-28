@@ -5,6 +5,7 @@ import { useRouter } from "vue-router";
 export default function useServiceCategories() {
     const serviceCategories = ref([]);
     const serviceCategory = ref([]);
+    const errors = ref(null);
     
     const router = useRouter()
     
@@ -16,17 +17,19 @@ export default function useServiceCategories() {
     };
     //
     const getServiceCategory = async (id) => {
+        console.log(id);
+        // let response = await axiosClient.get("/serviceCategory");
         let response = await axiosClient.get("/serviceCategory/show/" + id);
         // console.log('id');
         // console.log(id);
         console.log("getserviceCategory from composables ; res");
         console.log(response);
-        serviceCategory.value = response.data.data;    
+         serviceCategory.value = await response.data.data;    
     };
     const storeServiceCategory = async(data) => {
         // errors.value = ''
-        console.log('data');
-        console.log(data);
+        // console.log('data');
+        // console.log(data);
         // try {
             axiosClient.post("/serviceCategory", data)
             await router.push({name: 'ServiceCategoriesIndex'});
@@ -37,15 +40,16 @@ export default function useServiceCategories() {
         // }
     }
     const updateServiceCategory = async (id) => {
-        errors.value = ''
-        try {
-            await axiosClient.put('/serviceCategory/' + id, serviceCategory.value)
+        // errors.value = ''
+        // try {
+            console.log('hi');
+            await axiosClient.put('/serviceCategory/update/' + id, serviceCategory.value)
             await router.push({name: 'ServiceCategoriesIndex'});
-        } catch (e) {
-            if (e.response.status === 422) {
-                errors.value = e.response.data.errors
-            }
-        }
+        // } catch (e) {
+        //     if (e.response.status === 422) {
+        //         errors.value = e.response.data.errors
+        //     }
+        // }
     }
 
     const destroyServiceCategory = async (id) => {

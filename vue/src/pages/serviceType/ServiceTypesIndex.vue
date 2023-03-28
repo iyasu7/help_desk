@@ -93,6 +93,7 @@
                                                                 :to="{ name: 'ServiceTypeEdit', params: { id: serviceType.id } }"
                                                                 class="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded-md">
                                                                 Edit</RouterLink>
+                                                                {{ serviceType.id }}
                                                             <button @click="deleteServiceType(serviceType.id)"
                                                                 class="px-4 py-2 bg-red-500 hover:bg-red-700 text-white rounded-md">
                                                                 Delete

@@ -143,13 +143,13 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <pre>
+                    <pre>
                         {{ serviceTypes }}
                     </pre>
                     <pre>
                         hi
-                        {{ serviceCategory }}
-                    </pre> -->
+                        {{ serviceRequests }}
+                    </pre>
                 </div>
             </div>
         </div>
@@ -170,9 +170,9 @@ export default {
         const { serviceCategories, getServiceCategories } = useServiceCategories();
         // onMounted(getServiceRequests);
         onMounted(() => {
-            getServiceTypes(),
             getServiceRequests(),
-                getServiceCategories()
+            getServiceTypes(),
+            getServiceCategories()
         });
         // onMounted(callOnMounted);
 

@@ -28,7 +28,7 @@ export default function useServiceRequests() {
         console.log('COMdata');
         console.log(data);
         // try {
-            await axiosClient.post("/serviceRequest", data)
+            await axiosClient.post("/serviceRequest/create", data)
             await router.push({name: 'ServiceRequestsIndex'});
         // } catch (e) {
         //     if (e.response.status === 422) {
@@ -39,7 +39,7 @@ export default function useServiceRequests() {
     const updateServiceRequest = async (id) => {
         errors.value = ''
         try {
-            await axiosClient.put('/serviceRequest/' + id, serviceRequest.value)
+            await axiosClient.put('/serviceRequest/update/' + id, serviceRequest.value)
             await router.push({name: 'ServiceRequestsIndex'});
         } catch (e) {
             if (e.response.status === 422) {
@@ -50,7 +50,7 @@ export default function useServiceRequests() {
 
     const destroyServiceRequest = async (id) => {
         console.log('deleteServiceRequest serviceRequestjs b');
-        await axiosClient.delete('/serviceRequest/' + id)
+        await axiosClient.delete('/serviceRequest/delete/' + id)
         console.log('deleteServiceRequest serviceRequestjs a');
     }
     return {

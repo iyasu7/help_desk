@@ -28,22 +28,22 @@ export default function useRoles() {
     };
     const storeRole = async(data) => {
         // errors.value = ''
-        console.log('data');
+        console.log('data from saveRoles');
         console.log(data);
         // try {
-            axiosClient.post("/roles", data)
+            axiosClient.post("/roles/create", data)
             await router.push({name: 'RoleIndex'});
         // } catch (e) {
         //     if (e.response.status === 422) {
         //         errors.value = e.response.data.errors
-        //     }
+        //     } 
         // }
     }
     const updateRole = async (id) => {
         errors.value = ''
         try {
             await axiosClient.put('/roles/update/' + id, role.value)
-            await router.push({name: 'RoleIndex'});
+            // await router.push({name: 'RoleIndex'});
         } catch (e) {
             if (e.response.status === 422) {
                 errors.value = e.response.data.errors
@@ -53,9 +53,14 @@ export default function useRoles() {
 
     const destroyRole = async (id) => {
         console.log('deleteRole rolesjs b');
-        await axiosClient.delete('/roles/' + id)
+        axiosClient.delete('/roles/' + id)
         console.log('deleteRole rolesjs a');
     }
+
+    const givePermission = async (id,data)=> {
+        axiosClient.post('/roles/permissions/'+id,data);
+    }
+
     return {
         errors,
         role,
@@ -65,6 +70,7 @@ export default function useRoles() {
         getRoles,
         storeRole,
         updateRole,
+        givePermission,
         destroyRole,
     };
 }

@@ -15,16 +15,14 @@ return new class extends Migration
         Schema::create('slas', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class, 'user_id');
-            $table->string('main_consultant_name',45);
+            $table->string('main_consultant',45);
             $table->text('description')->nullable();
-            $table->string('slug',1000);
-            $table->string('image', 255)->nullable();
-            $table->text('consultant_representative');
-            $table->text('user_representative');
-            $table->text('SLA_Status');
-            $table->integer('status');
+            $table->string('file', 255)->nullable();
+            $table->text('customers_representative_name')->nullable();
+            $table->text('SLA_Status')->nullable();
+            $table->date('start_date');
+            $table->date('expire_date');
             $table->timestamps();
-            $table->timestamp('expire_date')->nullable();
             
             //   consultant_name varchar
             //   SLA_date timestamp

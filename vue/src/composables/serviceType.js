@@ -35,7 +35,7 @@ export default function useServiceTypes() {
         console.log('data');
         console.log(data);
         // try {
-            axiosClient.post("/serviceType", data)
+            axiosClient.post("/serviceType/create", data)
             await router.push({name: 'ServiceTypesIndex'});
         // } catch (e) {
         //     if (e.response.status === 422) {
@@ -46,7 +46,7 @@ export default function useServiceTypes() {
     const updateServiceType = async (id) => {
         errors.value = ''
         try {
-            await axiosClient.put('/serviceType/' + id, serviceType.value)
+            await axiosClient.put('/serviceType/update/' + id, serviceType.value)
             await router.push({name: 'ServiceTypesIndex'});
         } catch (e) {
             if (e.response.status === 422) {
@@ -56,9 +56,7 @@ export default function useServiceTypes() {
     }
 
     const destroyServiceType = async (id) => {
-        console.log('deleteServiceType serviceTypejs b');
-        await axiosClient.delete('/serviceType/' + id)
-        console.log('deleteServiceType serviceTypejs a');
+        await axiosClient.delete('/serviceType/delete/' + id)
     }
     return {
         serviceType,

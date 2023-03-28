@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\ServiceType;
+use Illuminate\Http\Request;
 use App\Models\ServiceRequest;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
@@ -16,8 +17,16 @@ class ServiceRequestController extends Controller
      */
     public function index()
     {
+        Log::info('ServiceRequest');
+        Log::info(ServiceRequest::all());
         return ServiceRequest::all();
     }
+    // public function add(Request $request)
+    // {
+    //     Log::info('ServiceRequest');
+    //     Log::info($request);
+    //     return ServiceRequest::all();
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -35,7 +44,7 @@ class ServiceRequestController extends Controller
         // $idType = $request['service_type_id'];
         // $user = User::find($idUser);
         $serviceRequest = new ServiceRequest;
-        // $serviceRequest->user_id = $request['user_id'];
+        // $serviceRequest->user_id = Auth::User().id;
         $serviceRequest->service_category_id = $request['service_category_id'];
         $serviceRequest->service_type_id = $request['service_type_id'];
         $serviceRequest->description = $request['description'];
@@ -56,17 +65,19 @@ class ServiceRequestController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(ServiceRequestRequest $request, string $id)
+    public function update(ServiceRequestRequest $request, $id)
     {
-        //
+        $serviceRequest = ServiceRequest::find($id);
+        $serviceRequest->update($request->validated());
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy( $id)
     {
-        //
+        $serviceRequest = ServiceRequest::find($id);
+        $serviceRequest->delete();
     }
     
 }

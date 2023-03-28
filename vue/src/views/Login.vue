@@ -14,7 +14,7 @@
 			</p>
 		</div> -->
 		<form class="mt-8 space-y-6" @submit.prevent="login">
-			<div class="min-h-screen  py-6 flex flex-col justify-center sm:py-12">
+			<div class="min-h-screen my-8 py-6 flex flex-col justify-center sm:py-12">
 				<div class="relative py-3 sm:max-w-xl sm:mx-auto">
 					<div
 						class="absolute inset-0 bg-gradient-to-l from-blue-300 to-blue-600 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:rotate-12 sm:rounded-3xl">

@@ -56,12 +56,14 @@ class ServiceTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ServiceType $serviceType)
+    public function destroy($id )
     {
+        Log::info($id);
+        $serviceType = ServiceType::find($id);
         $serviceType->delete();
     }
-    public function getTypeByCategory(string $id)
-    {
-        return ServiceTypeResource::collection(ServiceType::where('service_category_id',$id))->all();
-    }
+    // public function getTypeByCategory(string $id)
+    // {
+    //     return ServiceTypeResource::collection(ServiceType::where('service_category_id',$id))->all();
+    // }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\ServiceCategory;
+use Illuminate\Support\Facades\Log;
 use App\Http\Requests\ServiceCategoryRequest;
 
 class ServiceCategoryController extends Controller
@@ -28,8 +29,10 @@ class ServiceCategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function update(ServiceCategoryRequest $request, ServiceCategory $serviceCategory)
+    public function update(ServiceCategoryRequest $request, $id)
     {
+        $serviceCategory = ServiceCategory::find($id);
+        Log::info($serviceCategory);
         $validated = $request->validated();
         $serviceCategory->update($validated);
     }
@@ -37,9 +40,13 @@ class ServiceCategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        Log::info('serviceCategory');
+        dd($id);
+        $serviceCategory = ServiceCategory::find($id);
+        Log::info($serviceCategory);
+        return $serviceCategory;
     }
 
     /**

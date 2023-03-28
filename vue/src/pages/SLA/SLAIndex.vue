@@ -29,7 +29,7 @@
                         </div>
                         <div class="flex">
 
-                            <RouterLink :to="{ name: 'RoleCreate' }"
+                            <RouterLink :to="{ name: 'SLACreate' }"
                                 class="px-4 py-2 bg-green-700 hover:bg-green-500 dark:text-green-100 rounded-md">Create SLA
                             </RouterLink>
                         </div>

@@ -29,7 +29,7 @@
 
                             <div class="sm:col-span-6">
                                 <h2 class="text-2xl font-semibold my-4">Role Permissions</h2>
-                                <div v-if="rolePermissions && rolePermissions.length !=0">
+                                <div v-if="rolePermissions || rolePermissions.length !=0">
                                     <div v-for="role_permission in rolePermissions">
                                         <button class="px-4 py-2 bg-red-500 hover:bg-red-700 text-white rounded-md"
                                             @click="deletePermission(role.id, role_permission.id)">
@@ -38,9 +38,9 @@
                                     </div>
                                 </div>
                                 <label for="permission" class="block text-sm font-medium text-gray-700">Permission</label>
-                                <select id="permission" name="permission" autocomplete="permission-name"
+                                <select v-model="assignedPermission" id="permission" name="permission" autocomplete="permission-name"
                                     class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                    <option v-for="permission in permissions" :key="permission.id" :value="permission.name">
+                                    <option v-for="permission in permissions" :key="permission.id" :value="permission.id">
                                         {{ permission.name }}
                                     </option>
                                 </select>
@@ -66,8 +66,10 @@
                     <div class="max-w-xl mt-6">
                         <!-- <form @submit.prevent="assignPermission">
 
-                           
                         </form> -->
+                        <pre>
+                           length is:  {{ rolePermissions.length }}
+                        </pre>
                     </div>
                 </div>
             </div>
@@ -79,9 +81,10 @@
 import useRoles from '../../composables/roles';
 // import { usePermissions } from '../../composables/permissions';
 import usePermissions from '../../composables/permissions';
-import { onMounted } from 'vue';
+import { onMounted ,ref} from 'vue';
+const assignedPermission = ref('');
 // import { useRoute } from 'vue-router';
-const { role, rolePermissions, getRole, updateRole } = useRoles();
+const { role, rolePermissions, givePermission, getRole, updateRole } = useRoles();
 const { permissions, getPermissions } = usePermissions();
 
 const props = defineProps(['id']);
@@ -99,14 +102,16 @@ onMounted(() => {
     getRole(props.id);
     getPermissions();
 });
-console.log('permission');
-console.log(permissions.value);
+console.log('rolePermissions');
+console.log(rolePermissions.value);
 
 const saveRole = async () => {
     // role.value = editRole.value;
-    await updateRole(props.id)
-}
 
+    await updateRole(props.id)
+    // await givePermission(props.id,assignedPermission.value)
+}
+ 
 // import store from '../../store';
 // const role = {
 //     name: 'me',

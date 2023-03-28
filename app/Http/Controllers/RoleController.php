@@ -26,6 +26,7 @@ class RoleController extends Controller
         // Log::info('$id');
         // dd($id);
         $role = Role::find($id);
+        Log::info('$role show');
         Log::info($role);
 
         $returnedRole = new RoleResource($role);
@@ -86,11 +87,29 @@ class RoleController extends Controller
         $role->delete();
     }
 
-    public function givePermission(Request $request, Role $role)
+    public function givePermission(Request $request,  $id)
     {
+        $role = Role::find($id);
+        Log::info('$request->permission');
+        Log::info($request);
         if ($role->hasPermissionTo($request->permission)) {
+            return response()->with([
+                'message'=>'permission already assigned',
+            ]);
         }
-        $role->givePermissionTo($request->permission);
+        $this->validate($request, [
+            'name' => 'required|unique:roles|max:10',
+            'permission' => 'required'
+          ]);
+
+        foreach($request['permission'] as $permission)
+        {
+          if($p = Permission::where('id', '=', $permission)->first())
+          {
+            $role->givePermissionTo($p);
+          }
+        }
+        // $role->givePermissionTo($request->permission);
     }
 
     public function revokePermission(Role $role, Permission $permission)
@@ -98,6 +117,6 @@ class RoleController extends Controller
         if ($role->hasPermissionTo($permission)) {
             $role->revokePermissionTo($permission);
         }
-        return back()->with('message', 'Permission not exists.');
+        return with('message', 'Permission not exists.');
     }
 }

@@ -15,11 +15,12 @@
                 </div>
                 <div class="flex flex-col p-2 bg-slate-100">
                     <div class="space-y-8 divide-y divide-gray-200 w-1/2 mt-6">
-                        <form @submit="saveRole">
+                        <form @submit.prevent="saveServiceCategory">
                             <div class="sm:col-span-6">
-                                <label for="name" class="block text-sm font-medium text-gray-700"> Service Category name </label>
+                                <label for="name" class="block text-sm font-medium text-gray-700"> Service Category name
+                                </label>
                                 <div class="mt-1">
-                                    <input type="text" id="name" name="name" v-model="editServiceCategory.name"
+                                    <input type="text" id="name" name="name" v-model="serviceCategory.name"
                                         class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                                 </div>
 
@@ -27,7 +28,7 @@
 
                             </div>
                             <div class="sm:col-span-6 pt-5">
-                                <button type="submit"
+                                <button
                                     class="px-4 py-2 bg-green-500 hover:bg-green-700 rounded-md">Update</button>
                             </div>
                         </form>
@@ -40,28 +41,41 @@
 
 <script setup>
 import useServiceCategories from '../../composables/serviceCategory';
-import { onMounted,ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
-const { errors, serviceCategory, serviceCategories, getServiceCategory, updateServiceCategory } = useServiceCategories();
+const { errors, serviceCategory, serviceCategories, getServiceCategory, getServiceCategories, updateServiceCategory } = useServiceCategories();
 
 const props = defineProps(['id']);
 const route = useRoute();
 
-const serviceCategoryId = route.params.id;
+// const serviceCategoryId = route.params.id;
 const editServiceCategory = ref({});
 
-editServiceCategory.value = serviceCategories.value.filter((serviceCategory)=>{
-    serviceCategory.id === serviceCategoryId;
-})
+// editServiceCategory.value = serviceCategories.value.filter((serviceCategory)=>{
+//     serviceCategory.id === serviceCategoryId;
+// })
+const filtered = async (id) => {
+    await getServiceCategories();
+    serviceCategories.value.filter((serviceCate) => {
+        if (serviceCate.id == id) {
+            serviceCategory.value = serviceCate
+        }
+    })
+    console.log('serviceCategory');
+    console.log(serviceCategory);
+}
 
+onMounted(() => {
+    filtered(props.id);
+});
 
-
-    onMounted(getServiceCategory(props.id));
-
-    const saveServiceCategory = async () => {
-        serviceCategory.value = editServiceCategory.value;
-        await updateServiceCategory(props.id)
-    }
+const saveServiceCategory = async () => {
+    serviceCategory.value = editServiceCategory.value;
+    console.log('serviceCategory');
+    console.log(serviceCategory);
+    console.log(props.id);
+    await updateServiceCategory(props.id)
+}
 
 // import store from '../../store';
 // const serviceCategory = {

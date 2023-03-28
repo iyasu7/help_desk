@@ -91,8 +91,8 @@ import { reactive, ref } from 'vue';
 import { onMounted } from 'vue';
 
 const form = reactive({
-    service_category_id: '',
-    service_type_id: '',
+    service_category_id: null,
+    service_type_id: null,
     description: ''
 })
 
@@ -101,6 +101,7 @@ const { serviceCategories, getServiceCategories } = useServiceCategories();
 const { serviceTypes, getServiceTypes } = useServiceTypes();
 const selectedCategory = ref("")
 const filtered = reactive([])
+
 onMounted(() => {
     getServiceCategories()
 });
