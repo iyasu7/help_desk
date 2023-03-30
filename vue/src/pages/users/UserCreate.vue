@@ -87,7 +87,7 @@ const form = reactive({
     email: '',
     password: '',
     password_confirmation: '',
-    role: ''
+    role: null
 })
 
 const { storeUser } = useUsers();

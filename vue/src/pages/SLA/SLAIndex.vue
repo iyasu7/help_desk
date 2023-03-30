@@ -9,12 +9,7 @@
                     <div class="py-4 px-5 flex justify-between">
                         <div class="flex">
                             <button class="border border-gray-400 rounded shadow py-1 px-2 mr-2 flex items-center">
-                                <svg class="mr-1" height="16" viewBox="0 0 16 16" width="16"
-                                    xmlns="http://www.w3.org/2000/svg" style="height: 12px; width: 12px;">
-                                    <path
-                                        d="M13.994.004c.555 0 1.006.48Pw4HEUGAuiaJUkba6BNTUwdGVAfUe1FXhkn4UxfmGb6EQhmA1XWc3DUZMbQKZWrs9QuM7oDmFKL28TNF4NNxi7RhnZwur0 1 7 15.9V9.008l-5.788-7.39A.996.996 0 0 1 1.389.214a1.01 1.01 0 0 1 .617-.21z">
-                                    </path>
-                                </svg> Filter</button>
+                                Filter</button>
                             <div class="relative mr-2">
                                 <input class="border border-gray-400 rounded shadow py-1 pl-8 pr-2" type="text"
                                     placeholder="Search...">
@@ -58,32 +53,27 @@
                                         </thead>
                                         <tbody class="bg-white divide-y dark:text-gray-300 divide-gray-400">
 
-                                            <tr v-for="({id,name, description},index) in roles" :key="id"
+                                            <tr v-for="sla in slas" :key="id"
                                                 class=" dark:bg-gray-700  dark:border-b dark:border-gray-400">
 
-                                                <td class="px-6 py-4 whitespace-nowrap ">
-                                                    <div class="flex items-center">
-                                                        {{ index+1 }}
-                                                    </div>
-                                                </td>
                                                 <td class="px-6 py-4 whitespace-nowrap dark:border-gray-400">
                                                     <div class="flex items-center">
-                                                        {{ name }}
+                                                        {{ sla.name }}
                                                     </div>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap">
                                                     <div class="flex items-center">
-                                                        {{ description }}
+                                                        {{ sla.description }}
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="flex justify-end mr-2">
                                                         <div class="flex space-x-2">
                                                             <!--  -->
-                                                            <RouterLink :to="{ name: 'RoleEdit', params: { id: id } }"
+                                                            <RouterLink :to="{ name: 'SLAEdit', params: { id: id } }"
                                                                 class="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded-md">
                                                             Edit</RouterLink>
-                                                            <button @click="deleteRole(role.id)"
+                                                            <button @click="deleteSla(role.id)"
                                                                 class="px-4 py-2 bg-red-500 hover:bg-red-700 text-white rounded-md">
                                                                 Delete
                                                              </button>
@@ -104,29 +94,27 @@
 </template>
 
 <script >
-import { CIcon } from '@coreui/icons-vue';
-import { cilArrowCircleLeft } from '@coreui/icons';
 import { RouterLink } from 'vue-router';
-import useRoles from '../../composables/roles';
+import useSLAs from '../../composables/sla';
 import { onMounted } from 'vue';
 
 export default {
     setup() {
-        const { roles, getRoles, destroyRole } = useRoles();
-        onMounted(getRoles);
+        const { slas, getSLAs, destroySLA } = useSLAs();
+        onMounted(getSLAs);
 
-        const deleteRole = async (id) => {
+        const deleteSla = (id) => {
             if (!window.confirm('Are you sure?')) {
                 return
             }
             console.log('deleteRole index');
-            await destroyRole(id);
-            await getRoles();
+            ds
+            
         }
 
         return {
-            roles,
-            deleteRole,
+            slas,
+            deleteSla,
         }
     }
 }

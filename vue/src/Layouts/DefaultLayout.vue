@@ -39,14 +39,14 @@
     <aside id="sidebar"
       class="bg-gray-800 text-gray-100 md:w-64 w-3/4 space-y-6 pt-6 px-0 absolute inset-y-0 left-0 transform md:relative md:translate-x-0 transition duration-200 ease-in-out  md:flex md:flex-col md:justify-between overflow-y-auto"
       data-dev-hint="sidebar; px-0 for frameless; px-2 for visually inset the navigation">
-      <div class="flex flex-col space-y-6" data-dev-hint="optional div for having an extra footer navigation">
+      <div class="flex flex-col space-y-6 items-center justify-center" data-dev-hint="optional div for having an extra footer navigation">
         <!-- <a href="#" class="text-white flex items-center space-x-2 px-4" title="Tahses"> -->
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-0" fill="none" viewBox="0 0 24 24"
             stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
           </svg>
-          <span class="text-2xl font-extrabold whitespace-nowrap truncate">Tahses</span>
+          <span class="text-2xl font-extrabold whitespace-nowrap truncate mx-auto">Tahses</span>
         <!-- </a> -->
 
         <nav data-dev-hint="main navigation">
@@ -92,41 +92,26 @@
       </div>
 
       <nav data-dev-hint="second-main-navigation or footer navigation">
-        <div class="hidden md:block  py-2 px-4 transition duration-200 hover:bg-gray-700 hover:text-white">
-          <div class="ml-4 flex items-center md:ml-6">
+        <div class="hidden md:block  py-2 px-4 transition duration-200 bg-gray-900 hover:text-white">
+          <div class="flex items-center">
 
 
-            <!-- Profile dropdown -->
-            <Menu as="div" class="relative ml-3">
-              <transition enter-active-class="transition ease-out duration-100"
-                enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100"
-                leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100"
-                leave-to-class="transform opacity-0 scale-95">
-                <MenuItems
-                  class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                  <MenuItem v-slot="{ active }">
-                  <a @click="logout" :class="[active ? 'bg-gray-100'
-                    : ''
-                    , 'block px-4 py-2 text-sm text-gray-700']">Signout</a>
-                  </MenuItem>
-                </MenuItems>
-              </transition>
-            </Menu>
+            
 
             <Disclosure >
-            <div class="flex justify-center mx-2" >
+            <div class="flex items-center justify-center mx-2" >
               <div class="flex items-center">
               <div class="flex-shrink-0">
                 <img class="h-10 w-10 rounded-full" :src="user.imageUrl" alt="" />
               </div>
               <div class="ml-1">
                 <div class="text-base font-medium leading-none text-white">{{ user.name }}</div>
-                <div class="text-sm font-medium leading-none text-gray-400">{{ user.email }}</div>
+                <!-- <div class="text-sm font-medium leading-none text-gray-400">{{ user.email }}</div> -->
               </div>
             </div>
             <div class="mt-3 space-y-1 px-2 flex items-center">
               <DisclosureButton  as="a" @click="logout" 
-              class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
+              class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 bg-gray-900 hover:bg-gray-700 hover:text-white"
               > Signout </DisclosureButton>
             </div>
             </div>
@@ -161,8 +146,6 @@ const user = {
 
 const navigation = [
   { name: 'Dashboard', to: { name: "Dashboard" } },
-  { name: 'ClientList', to: { name: "ClientList" } },
-  { name: 'AgentList', to: { name: "AgentList" } },
   { name: 'Users', to: { name: "UsersIndex" } },
   { name: 'Roles', to: { name: "RoleIndex" } },
   { name: 'Permissions', to: { name: "PermissionsIndex" } },

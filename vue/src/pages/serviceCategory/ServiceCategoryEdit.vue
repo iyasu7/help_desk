@@ -1,7 +1,7 @@
 <template>
     <div class="py-12 w-full">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-2">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-2 dark:bg-gray-600">
                 <div class="flex justifiy-start p-2">
                     <RouterLink :to="{ name: 'ServiceCategoriesIndex' }"
                         class="px-4 flex py-2 bg-green-500 hover:bg-green-700 rounded-md text-gray-800">
@@ -10,19 +10,20 @@
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
                         </svg>
-                        <span class="pl-1">Roles</span>
+                        <span class="pl-1">Service Category</span>
                     </RouterLink>
                 </div>
-                <div class="flex flex-col p-2 bg-slate-100">
+                <div class="flex flex-col p-2 bg-slate-100 dark:bg-gray-600">
                     <div class="space-y-8 divide-y divide-gray-200 w-1/2 mt-6">
                         <form @submit.prevent="saveServiceCategory">
                             <div class="sm:col-span-6">
-                                <label for="name" class="block text-sm font-medium text-gray-700"> Service Category name
+                                <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-3"> Service Category name
                                 </label>
                                 <div class="mt-1">
                                     <input type="text" id="name" name="name" v-model="serviceCategory.name"
                                         class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                                 </div>
+                                {{ serviceCategory.name }}
 
                                 <!-- <span v-if="error" class="text-red-400 text-sm">{{ $message }}</span> -->
 
@@ -70,8 +71,8 @@ onMounted(() => {
 });
 
 const saveServiceCategory = async () => {
-    serviceCategory.value = editServiceCategory.value;
-    console.log('serviceCategory');
+    // serviceCategory.value = editServiceCategory.value;
+    console.log('serviceCategoryedit');
     console.log(serviceCategory);
     console.log(props.id);
     await updateServiceCategory(props.id)

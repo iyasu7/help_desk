@@ -5,6 +5,7 @@ import { useRouter } from "vue-router";
 export default function useUsers() {
     const users = ref([]);
     const user = ref([]);
+    const roleUsers = ref([]);
     
     const router = useRouter()
     
@@ -14,6 +15,12 @@ export default function useUsers() {
         console.log(res);
         users.value = res.data.data;
     };
+    const getRoleUsers = async()=>{
+        let res = await axiosClient.get("/users/agents");
+        console.log('res roleUser');
+        console.log(res);
+        roleUsers.value = res.data
+    }
     //
     const getUser = async (id) => {
         let response = await axiosClient.get("/users/show/" + id);
@@ -49,15 +56,15 @@ export default function useUsers() {
     }
 
     const destroyUser = async (id) => {
-        console.log('deleteUser usersjs b');
-        await axiosClient.delete('/users/' + id)
-        console.log('deleteUser usersjs a');
+        await axiosClient.delete('/users/delete/' + id)
     }
     return {
         user,
         users,
+        roleUsers,
         getUser,
         getUsers,
+        getRoleUsers,
         storeUser,
         updateUser,
         destroyUser,

@@ -52,8 +52,10 @@ class ServiceCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ServiceCategory $serviceCategory)
-    {
+    public function destroy( $id)
+    {   
+        
+        $serviceCategory = ServiceCategory::find($id);
         $serviceCategory->delete();
     }
 }

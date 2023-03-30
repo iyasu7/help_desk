@@ -14,9 +14,9 @@
                     </RouterLink>
                 </div>
                 <div class="flex flex-col p-2 bg-slate-100 dark:bg-gray-600">
-                    <div class="space-y-8 divide-y divide-gray-200 w-1/2 mt-6">
+                    <div class="space-y-8 divide-y divide-gray-200 mt-6">
                         <form @submit.prevent="saveServiceRequest">
-                            <div class="sm:col-span-6">
+                            <div class="grid gap-6 mb-4 mx-6 mt-2 md:grid-cols-2">
                                 <div>
                                     <label for="name"
                                         class="block text-sm font-bold ml-1 my-2 dark:text-gray-200 text-gray-800">
@@ -25,8 +25,7 @@
                                         service_category_id: {{ serviceRequest.service_category_id }}
                                         <select name="category"
                                             class="py-3 px-4 bg-gray-700 dark:text-gray-300 block w-full border-2 border-gray-500 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 shadow-sm"
-                                            required v-model="serviceRequest.service_category_id"
-                                            v-on:change="getTypes()">
+                                            required v-model="serviceRequest.service_category_id" v-on:change="getTypes()">
                                             <option value="">-- Choose Service Category --</option>
                                             <option v-for="serviceCategory in serviceCategories" :value="serviceCategory.id"
                                                 :key="serviceCategory.id"
@@ -37,12 +36,27 @@
                                     </div>
                                 </div>
                                 <div>
+                                    <label for="assigned_to"
+                                        class="block text-sm font-bold ml-1 my-2 dark:text-gray-200 text-gray-800">
+                                    Assigned To    
+                                    </label>
+                                        <select name="assigned_to"
+                                            class="py-3 px-4 bg-gray-700 dark:text-gray-300 block w-full border-2 border-gray-500 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 shadow-sm"
+                                            required v-model="serviceRequest.assigned_agent_id">
+                                            <option v-for="agent in roleUsers" :value="agent.id"
+                                                :key="agent.id"
+                                                class="py-3 px-4 mx-4 my-2 bg-gray-600 dark:text-gray-200 block w-full border-2 border-gray-500 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 shadow-sm">
+                                                {{ agent.name }}
+                                            </option>
+                                        </select>
+                                </div>
+                                <div>
                                     <label for="name"
                                         class="block text-sm font-bold ml-1 my-2 dark:text-gray-200 text-gray-800">Service
                                         Type</label>
                                     <div>
                                         service_type_id: {{ serviceRequest.service_type_id }}
-                                        <select name="city" 
+                                        <select name="city"
                                             class="py-3 px-4 bg-gray-700 dark:text-gray-300 block w-full border-2 border-gray-500 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 shadow-sm"
                                             required v-model="serviceRequest.service_type_id">
                                             <option value="" v-if="editServiceType.length == 0">-- Choose Category First --
@@ -56,32 +70,57 @@
                                     </div>
                                 </div>
                                 <div>
+                                    <label for="status"
+                                        class="block text-sm font-bold ml-1 my-2 dark:text-gray-200 text-gray-800">
+                                    Status   
+                                    </label>
+                                        <select name="status"
+                                            class="py-3 px-4 bg-gray-700 dark:text-gray-300 block w-full border-2 border-gray-500 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 shadow-sm"
+                                            required v-model="serviceRequest.status">
+                                            <option v-for="status in statuses" :value="status"
+                                                :key="status"
+                                                class="py-3 px-4 mx-4 my-2 bg-gray-600 dark:text-gray-200 block w-full border-2 border-gray-500 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 shadow-sm">
+                                                {{ status }}
+                                            </option>
+                                        </select>
+                                </div>
+                                <div>
                                     <label for="description"
                                         class="block text-sm font-bold ml-1 my-2 dark:text-gray-200 text-gray-800">Description</label>
                                     <div class="relative">
-                                        <textarea type="text" v-model="serviceRequest.description" id="description" name="description"
+                                        <textarea type="text" v-model="serviceRequest.description" id="description"
+                                            name="description"
                                             class="py-3 px-4 bg-gray-700 dark:text-gray-300 block w-full border-2 border-gray-500 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 shadow-sm"
                                             required>
-                                        </textarea>
+                                                </textarea>
                                     </div>
                                     <p class="hidden text-xs text-red-600 mt-2" id="email-error">Please include a valid
                                         description
                                     </p>
                                 </div>
+                                <!-- <div>
+                <label for="visitors" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-200">Unique visitors
+                    (per month)</label>
+                <input type="number" id="visitors"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-200 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="" required>
+            </div> -->
+                            </div>
+                            <div class="sm:col-span-6">
+                                
 
                                 <!-- <span v-if="error" class="text-red-400 text-sm">{{ $message }}</span> -->
 
                             </div>
                             <div class="sm:col-span-6 pt-5">
-                                <button
-                                    class="px-4 py-2 bg-green-500 hover:bg-green-700 rounded-md">Update</button>
+                                <button class="px-4 py-2 bg-green-500 hover:bg-green-700 rounded-md">Update</button>
                             </div>
                         </form>
                     </div>
                 </div>
                 <pre>
-                    {{ serviceRequest }}
-                </pre>
+                            {{ serviceRequest }}
+                        </pre>
             </div>
         </div>
     </div>
@@ -91,19 +130,25 @@
 import useServiceRequests from '../../composables/serviceRequest';
 import useServiceCategories from '../../composables/serviceCategory';
 import useServiceTypes from '../../composables/serviceType';
+import useUsers from '../../composables/users';
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 
 const { errors, serviceRequest, serviceRequests, getServiceRequests, updateServiceRequest } = useServiceRequests();
-const {serviceCategories, getServiceCategories} = useServiceCategories();
+const { serviceCategories, getServiceCategories } = useServiceCategories();
 const { serviceTypes, getServiceTypes } = useServiceTypes();
+const { roleUsers , getRoleUsers } = useUsers();
 
-
+const statuses = [
+    "PENNDING",
+    "DONE",
+]
 const editServiceType = ref([]);
-onMounted(()=>{
+onMounted(() => {
     getServiceTypes();
     filteredReq(props.id)
     getServiceCategories()
+    getRoleUsers(3)
     console.log('onmount serviceRequest');
     console.log(serviceRequest);
 });
@@ -111,7 +156,7 @@ onMounted(()=>{
 const props = defineProps(['id']);
 
 
-const filteredReq = async(id) => {
+const filteredReq = async (id) => {
     console.log(id);
     await getServiceRequests()
     console.log('serviceR');
@@ -119,21 +164,21 @@ const filteredReq = async(id) => {
     serviceRequests.value.filter((serviceReq) => {
         // console.log('serviceReq');
         // console.log(serviceReq);
-    if(serviceReq.id == id){
-        serviceRequest.value = serviceReq
-        
-    };
-})
-console.log('serviceRequest filReq');
-console.log(serviceRequest.value);
+        if (serviceReq.id == id) {
+            serviceRequest.value = serviceReq
+
+        };
+    })
+    console.log('serviceRequest filReq');
+    console.log(serviceRequest.value);
 }
 
 const getTypes = async () => {
     await getServiceTypes();
     console.log(serviceTypes);
-    editServiceType.length=0;
-    serviceTypes.value.filter((serviceTy)=>{
-        if(serviceTy.service_category_id == serviceRequest.value.service_category_id){
+    editServiceType.length = 0;
+    serviceTypes.value.filter((serviceTy) => {
+        if (serviceTy.service_category_id == serviceRequest.value.service_category_id) {
             editServiceType.value.push(serviceTy);
         }
     })

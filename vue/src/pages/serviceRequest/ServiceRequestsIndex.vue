@@ -3,18 +3,13 @@
         <span class="font-medium text-4xl mb-4">Client List</span> -->
     <div class="rounded bg-white shadow-md" style="width: 1063px;">
 
-        <div class="py-12 w-full">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="py-4 w-full">
+            <div class=" mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-2">
                     <div class="py-4 px-5 flex justify-between">
                         <div class="flex">
                             <button class="border border-gray-400 rounded shadow py-1 px-2 mr-2 flex items-center">
-                                <svg class="mr-1" height="16" viewBox="0 0 16 16" width="16"
-                                    xmlns="http://www.w3.org/2000/svg" style="height: 12px; width: 12px;">
-                                    <path
-                                        d="M13.994.004c.555 0 1.006.48Pw4HEUGAuiaJUkba6BNTUwdGVAfUe1FXhkn4UxfmGb6EQhmA1XWc3DUZMbQKZWrs9QuM7oDmFKL28TNF4NNxi7RhnZwur0 1 7 15.9V9.008l-5.788-7.39A.996.996 0 0 1 1.389.214a1.01 1.01 0 0 1 .617-.21z">
-                                    </path>
-                                </svg> Filter</button>
+                                Filter</button>
                             <div class="relative mr-2">
                                 <input class="border border-gray-400 rounded shadow py-1 pl-8 pr-2" type="text"
                                     placeholder="Search...">
@@ -48,9 +43,6 @@
                                             class="bg-gray-300  dark:bg-gray-800 dark:border-b dark:text-gray-400 dark:border-gray-200">
                                             <tr>
                                                 <th scope="col"
-                                                    class="w-1/12 px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
-                                                    Id</th>
-                                                <th scope="col"
                                                     class="w-1/4 px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
                                                     Service Category</th>
                                                 <th scope="col"
@@ -68,9 +60,6 @@
                                                 <th scope="col"
                                                     class="w-1/4 px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
                                                     Assigned To</th>
-                                                <th scope="col"
-                                                    class="w-1/4 px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
-                                                    Completed</th>
                                                 <th scope="col" class="relative w-2/12 px-6 py-3 dark:text-gray-300">
                                                     <span class="sr-only">Edit</span>
                                                 </th>
@@ -81,11 +70,6 @@
                                             <tr v-for="serviceRequest in serviceRequests" :key="serviceRequest.id"
                                                 class=" dark:bg-gray-700  dark:border-b dark:border-gray-400">
 
-                                                <td class="px-6 py-4 whitespace-nowrap ">
-                                                    <div class="flex items-center">
-                                                        {{ serviceRequest.id }}
-                                                    </div>
-                                                </td>
                                                 <td class="px-6 py-4 whitespace-nowrap dark:border-gray-400">
                                                     <div class="flex items-center">
                                                         {{ serviceRequest.service_category_id }}
@@ -108,17 +92,12 @@
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap dark:border-gray-400">
                                                     <div class="flex items-center">
-                                                        {{ serviceRequest.status ? serviceRequest.status: 'PENDING'}}
+                                                        {{ serviceRequest.status ? serviceRequest.status : 'PENDING' }}
                                                     </div>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap dark:border-gray-400">
                                                     <div class="flex items-center">
                                                         {{ serviceRequest.assigned_to ? serviceRequest.assigned_to : 'NOT ASSIGNED' }}
-                                                    </div>
-                                                </td>
-                                                <td class="px-6 py-4 whitespace-nowrap dark:border-gray-400">
-                                                    <div class="flex items-center">
-                                                        {{ serviceRequest.completed ? 'DONE' : 'NOT YET'}}
                                                     </div>
                                                 </td>
                                                 <td>
@@ -128,7 +107,8 @@
                                                             <RouterLink
                                                                 :to="{ name: 'ServiceRequestEdit', params: { id: serviceRequest.id } }"
                                                                 class="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded-md">
-                                                                Edit</RouterLink>
+                                                                Edit
+                                                            </RouterLink>
                                                             <button @click="deleteServiceRequest(serviceRequest.id)"
                                                                 class="px-4 py-2 bg-red-500 hover:bg-red-700 text-white rounded-md">
                                                                 Delete
@@ -144,12 +124,12 @@
                         </div>
                     </div>
                     <pre>
-                        {{ serviceTypes }}
-                    </pre>
+                            {{ serviceTypes }}
+                        </pre>
                     <pre>
-                        hi
-                        {{ serviceRequests }}
-                    </pre>
+                            hi
+                            {{ serviceRequests }}
+                        </pre>
                 </div>
             </div>
         </div>
@@ -161,7 +141,7 @@ import { RouterLink } from 'vue-router';
 import useServiceRequests from '../../composables/serviceRequest';
 import useServiceTypes from '../../composables/serviceType';
 import useServiceCategories from '../../composables/serviceCategory';
-import { onMounted , computed } from 'vue';
+import { onMounted, computed } from 'vue';
 
 export default {
     setup() {
@@ -171,8 +151,8 @@ export default {
         // onMounted(getServiceRequests);
         onMounted(() => {
             getServiceRequests(),
-            getServiceTypes(),
-            getServiceCategories()
+                getServiceTypes(),
+                getServiceCategories()
         });
         // onMounted(callOnMounted);
 
@@ -191,8 +171,8 @@ export default {
             await getServiceRequests();
         }
 
-        const serviceCategory = computed((id)=>{
-         serviceCategories.value.filter((service)=>{
+        const serviceCategory = computed((id) => {
+            serviceCategories.value.filter((service) => {
                 service.id === id;
             })
         })

@@ -42,6 +42,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('show/{user}', [UserController::class, 'show']);
         Route::put('update/{user}', [UserController::class, 'update']);
         Route::delete('delete/{id}', [UserController::class, 'destroy']);
+        Route::get('agents',[UserController::class,'roleUsers']);
     });
     Route::get('/logout', [AuthController::class, 'logout']);
     // Route::apiResource('/roles', RoleController::class);
@@ -50,7 +51,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::post('create', [RoleController::class, 'store']);
         Route::get('show/{id}', [RoleController::class, 'show']);
         Route::put('update/{id}', [RoleController::class, 'update']);
-        Route::get('delete/{id}', [RoleController::class, 'destroy']);
+        Route::delete('delete/{id}', [RoleController::class, 'destroy']);
         Route::post('permissions/{id}', [Rolecontroller::class,'givePermission']);
         Route::delete('{id}/permissions/{perId}' , [RoleController::class,'revokePermission']);
     });

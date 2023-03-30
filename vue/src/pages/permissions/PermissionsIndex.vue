@@ -9,12 +9,7 @@
                     <div class="py-4 px-5 flex justify-between">
                         <div class="flex">
                             <button class="border border-gray-400 rounded shadow py-1 px-2 mr-2 flex items-center">
-                                <svg class="mr-1" height="16" viewBox="0 0 16 16" width="16"
-                                    xmlns="http://www.w3.org/2000/svg" style="height: 12px; width: 12px;">
-                                    <path
-                                        d="M13.994.004c.555 0 1.006.48Pw4HEUGAuiaJUkba6BNTUwdGVAfUe1FXhkn4UxfmGb6EQhmA1XWc3DUZMbQKZWrs9QuM7oDmFKL28TNF4NNxi7RhnZwur0 1 7 15.9V9.008l-5.788-7.39A.996.996 0 0 1 1.389.214a1.01 1.01 0 0 1 .617-.21z">
-                                    </path>
-                                </svg> Filter</button>
+                                Filter</button>
                             <div class="relative mr-2">
                                 <input class="border border-gray-400 rounded shadow py-1 pl-8 pr-2" type="text"
                                     placeholder="Search...">

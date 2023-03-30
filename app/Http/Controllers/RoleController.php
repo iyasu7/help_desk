@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Requests\RoleRequest;
@@ -64,9 +65,9 @@ class RoleController extends Controller
     {
         // $validated = $request->validate(['name' => ['required', 'min:3']]);
         // $role = Role
-        Log::info('role');
-        $role = Role::create($request->validated());
-        Log::info($role);
+        $validated = $request->validated();
+        $role = Role::create(['name' => $validated['name'],'description' => $validated['description']]);
+        
     }
 
     // public function edit(Role $role)
@@ -81,9 +82,10 @@ class RoleController extends Controller
         $role->update($validated);
     }
 
-    public function destroy(Role $role)
+    public function destroy($id)
     {
         Log::info('role controller delete');
+        $role = Role::find($id);
         $role->delete();
     }
 

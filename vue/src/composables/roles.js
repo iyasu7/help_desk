@@ -28,10 +28,10 @@ export default function useRoles() {
     };
     const storeRole = async(data) => {
         // errors.value = ''
-        console.log('data from saveRoles');
-        console.log(data);
+        // console.log('data from saveRoles');
+        // console.log(data);
         // try {
-            axiosClient.post("/roles/create", data)
+            await axiosClient.post("/roles/create", data)
             await router.push({name: 'RoleIndex'});
         // } catch (e) {
         //     if (e.response.status === 422) {
@@ -53,7 +53,7 @@ export default function useRoles() {
 
     const destroyRole = async (id) => {
         console.log('deleteRole rolesjs b');
-        axiosClient.delete('/roles/' + id)
+        axiosClient.delete('/roles/delete/' + id)
         console.log('deleteRole rolesjs a');
     }
 

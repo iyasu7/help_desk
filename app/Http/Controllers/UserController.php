@@ -15,9 +15,18 @@ class UserController extends Controller
 {
     public function index()
     {
-        // $users = User::all();
-        Log::info('user index');
-        Log::info(User::all());
+        $users = User::all();
+        $result = [];
+        $result = array();
+        foreach ($users as $user) {
+            // array_push($result,$user->getRoleNames());
+            $user->getRoleNames();
+            // $result->array_push
+            $role = $user->getRoleNames();
+            Log::info($role);
+        }
+        Log::info('roles');
+        // Log::info($result);
         return UserResource::collection(User::all());
     }
 
@@ -35,85 +44,84 @@ class UserController extends Controller
         $data['password'] = Hash::make($data['password']);
         // $data.push('email_verified_at'] = now();
         $data['email_verified_at'] = now();
-        $user = User::create($data)->assignRole($data['role']);
+        $roleId = $data['role'];
+        $roleName = Role::find($roleId);
+        $user = User::create($data)->assignRole($roleName->name);
 
         return ([
             'user' => $user,
         ]);
     }
-    // public function assignRole(Request $request, User $user)
-    // {
-    //     if ($user->hasRole($request->role)) {
-    //         return response([
-    //             'message' => 'Role exists.'
-    //         ]);
-    //         // return back()->with('message', 'Role exists.');
-    //     }
-
-    //     $user->assignRole($request->role);
-    //     return response([
-    //         'message' => 'Role assigned.'
-    //     ]);
-    //     // return back()->with('message', 'Role assigned.');
-    // }
-
-    // public function removeRole(User $user, Role $role)
-    // {
-    //     if ($user->hasRole($role)) {
-    //         $user->removeRole($role);
-    //         return response([
-    //             'message' => 'Role removed.'
-    //         ]);
-    //         // return back()->with('message', 'Role removed.');
-    //     }
-    //     return response([
-    //         'message' => 'Role not exists.'
-    //     ]);
-    //     // return back()->with('message', 'Role not exists.');
-    // }
-
-    // public function givePermission(Request $request, User $user)
-    // {
-    //     if ($user->hasPermissionTo($request->permission)) {
-    //         return response([
-    //             'message' => 'Permission exists.'
-    //         ]);
-    //         // return back()->with('message', 'Permission exists.');
-    //     }
-    //     $user->givePermissionTo($request->permission);
-    //     return response([
-    //         'message' => 'Permission added.'
-    //     ]);
-    //     // return back()->with('message', 'Permission added.');
-    // }
-
-    // public function revokePermission(User $user, Permission $permission)
-    // {
-    //     if ($user->hasPermissionTo($permission)) {
-    //         $user->revokePermissionTo($permission);
-    //         return response([
-    //             'message' => 'Permission revoked.'
-    //         ]);
-    //         // return back()->with('message', 'Permission revoked.');
-    //     }
-    //     return response([
-    //         'message' => 'Permission does not exists.'
-    //     ]);
-    //     // return back()->with('message', 'Permission does not exists.');
-    // }
-
-    public function destroy(User $user)
+    public function roleUsers()
     {
+        Log::info('user agents');
+        Log::info(User::all()->where('role',3));
+        return User::all()->where('role',3);
+    }
+    public function assignRole(Request $request, User $user)
+    {
+        if ($user->hasRole($request->role)) {
+            return response([
+                'message' => 'Role exists.'
+            ]);
+        }
+
+        $user->assignRole($request->role);
+        return response([
+            'message' => 'Role assigned.'
+        ]);
+    }
+
+    public function removeRole(User $user, Role $role)
+    {
+        if ($user->hasRole($role)) {
+            $user->removeRole($role);
+            return response([
+                'message' => 'Role removed.'
+            ]);
+        }
+        return response([
+            'message' => 'Role not exists.'
+        ]);
+    }
+
+    public function givePermission(Request $request, User $user)
+    {
+        if ($user->hasPermissionTo($request->permission)) {
+            return response([
+                'message' => 'Permission exists.'
+            ]);
+        }
+        $user->givePermissionTo($request->permission);
+        return response([
+            'message' => 'Permission added.'
+        ]);
+    }
+
+    public function revokePermission(User $user, Permission $permission)
+    {
+        if ($user->hasPermissionTo($permission)) {
+            $user->revokePermissionTo($permission);
+            return response([
+                'message' => 'Permission revoked.'
+            ]);
+        }
+        return response([
+            'message' => 'Permission does not exists.'
+        ]);
+    }
+
+    public function destroy($id)
+    {
+        $user = User::find($id);
         if ($user->hasRole('admin')) {
             return response([
                 'message' => 'you are admin.'
             ]);
-            // return back()->with('message', 'you are admin.');
         }
         $user->delete();
         return response([
             'message' => 'User deleted.'
         ]);
-        // return back()->with('message', 'User deleted.');
     }
 }

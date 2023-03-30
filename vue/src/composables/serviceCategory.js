@@ -54,7 +54,7 @@ export default function useServiceCategories() {
 
     const destroyServiceCategory = async (id) => {
         console.log('deleteServiceCategory serviceCategoryjs b');
-        await axiosClient.delete('/serviceCategory/' + id)
+        await axiosClient.delete('/serviceCategory/delete/' + id)
         console.log('deleteServiceCategory serviceCategoryjs a');
     }
     return {

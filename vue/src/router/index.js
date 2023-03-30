@@ -1,9 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Login from "../views/Login.vue";
 import Dashboard from "../views/Dashboard.vue";
-import ClientList from "../pages/Client/ClientList.vue";
-import CreateClient from "../pages/Client/CreateClient.vue";
-import AgentList from "../pages/Agent/AgentList.vue";
 import UsersIndex from "../pages/users/UsersIndex.vue";
 import UserCreate from "../pages/users/UserCreate.vue";
 import UserEdit from "../pages/users/UserEdit.vue";
@@ -37,14 +34,6 @@ const routes = [
         meta: { requiresAuth: true },
         children: [
             { path: "/", name: "Dashboard", component: Dashboard },
-            { path: "clientlist", name: "ClientList", component: ClientList },
-            {
-                path: "createclient",
-                name: "CreateClient",
-                component: CreateClient,
-            },
-            { path: "agentlist", name: "AgentList", component: AgentList },
-
 
             { 
                 path: "users", name: "UsersIndex", component: UsersIndex 
@@ -58,7 +47,10 @@ const routes = [
             { path: "roles", name: "RoleIndex", component: RolesIndex },
             { path: "roles/create", name: "RoleCreate", component: RoleCreate },
             { path: "roles/:id/edit", name: "RoleEdit", component: RoleEdit , props: true},
-
+            
+            { path: "permissions", name: "PermissionsIndex", component: PermissionsIndex, },
+            { path: "permissions/create", name: "PermissionCreate", component: PermissionCreate, },
+            { path: "permissions/:id/edit", name: "PermissionEdit", component: PermissionEdit, props: true },
 
             { path: "serviceCategorys", name: "ServiceCategoriesIndex", component: ServiceCategoriesIndex },
             { path: "serviceCategorys/create", name: "ServiceCategoryCreate", component: ServiceCategoryCreate },
@@ -96,22 +88,6 @@ const routes = [
             //         },
             //     ],
             // },
-            {
-                path: "permissions",
-                name: "PermissionsIndex",
-                component: PermissionsIndex,
-            },
-            {
-                path: "permissions/create",
-                name: "PermissionCreate",
-                component: PermissionCreate,
-            },
-
-            {
-                path: "permissions/:id/edit",
-                name: "PermissionEdit",
-                component: PermissionEdit,
-            },
             // {
             //     path: "slas/:id/edit",
             //     name: "SLACreate",
