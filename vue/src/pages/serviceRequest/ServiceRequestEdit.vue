@@ -16,7 +16,7 @@
                 <div class="flex flex-col p-2 bg-slate-100 dark:bg-gray-600">
                     <div class="space-y-8 divide-y divide-gray-200 mt-6">
                         <form @submit.prevent="saveServiceRequest">
-                            <div class="grid gap-6 mb-4 mx-6 mt-2 md:grid-cols-2">
+                            <div class="grid gap-6 mb-4 mx-6 mt-2 md:grid-cols-2">s
                                 <div>
                                     <label for="name"
                                         class="block text-sm font-bold ml-1 my-2 dark:text-gray-200 text-gray-800">
@@ -197,7 +197,7 @@ const getTypes = async () => {
 
 
 const saveServiceRequest = async () => {
-    serviceRequest.value = editServiceRequest.value;
+    // serviceRequest.value = editServiceRequest.value;
     await updateServiceRequest(props.id)
 }
 

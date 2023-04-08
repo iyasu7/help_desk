@@ -23,4 +23,10 @@ class ServiceRequest extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function serviceCategory(){
+            return $this->belongsTo(ServiceCategory::class);
+    }
+    public function serviceType(){
+        return $this->belongsTo(ServiceType::class);
+}
 }

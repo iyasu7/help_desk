@@ -19,4 +19,8 @@ class ServiceType extends Model
     {
         return $this->belongsTo(ServiceCategory::class);
     }
+    
+    public function serviceRequest(){
+        return $this->hasMany(ServiceRequest::class);
+    }
 }

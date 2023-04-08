@@ -36,36 +36,20 @@
                                 <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                                     <table class="min-w-full divide-y divide-gray-200">
                                         <thead
-                                            class="bg-gray-300  dark:bg-gray-800 dark:border-b dark:text-gray-400 dark:border-gray-200">
+                                            class="bg-gray-300 ml-3 dark:bg-gray-800 dark:border-b dark:text-gray-400 dark:border-gray-200">
                                             <tr>
                                                 <th scope="col"
                                                     class="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
-                                                    Id</th>
-                                                <th scope="col"
-                                                    class="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
                                                     Name</th>
-                                                <th scope="col"
-                                                    class="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
-                                                    Description</th>
                                             </tr>
                                         </thead>
                                         <tbody class="bg-white divide-y dark:text-gray-300 divide-gray-400">
 
                                             <tr v-for="permission in permissions" :key="permission.id"
                                                 class=" dark:bg-gray-700  dark:border-b dark:border-gray-400">
-                                                <td class="px-6 py-4 whitespace-nowrap ">
-                                                    <div class="flex items-center">
-                                                        {{ permission.id }}
-                                                    </div>
-                                                </td>
                                                 <td class="px-6 py-4 whitespace-nowrap dark:border-gray-400">
                                                     <div class="flex items-center">
                                                         {{ permission.name }}
-                                                    </div>
-                                                </td>
-                                                <td class="px-6 py-4 whitespace-nowrap">
-                                                    <div class="flex items-center">
-                                                        {{ permission.description }}
                                                     </div>
                                                 </td>
                                             </tr>

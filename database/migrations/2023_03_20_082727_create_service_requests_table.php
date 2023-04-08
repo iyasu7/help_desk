@@ -28,7 +28,6 @@ return new class extends Migration
             // $table->foreignIdFor(User::class, 'user_id');
             $table->unsignedInteger('assigned_agent_id')->nullable();
             // $table->integer('Assigned To')->nullable();
-            $table->boolean('completed')->nullable();
             $table->timestamps();
         });
     }

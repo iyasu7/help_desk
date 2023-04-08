@@ -72,12 +72,12 @@
 
                                                 <td class="px-6 py-4 whitespace-nowrap dark:border-gray-400">
                                                     <div class="flex items-center">
-                                                        {{ serviceRequest.service_category_id }}
+                                                        {{ serviceRequest.service_category.name }}
                                                     </div>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap dark:border-gray-400">
                                                     <div class="flex items-center">
-                                                        {{ serviceRequest.service_type_id }}
+                                                        {{ serviceRequest.service_type.name }}
                                                     </div>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap">
@@ -119,17 +119,88 @@
                                             </tr>
                                         </tbody>
                                     </table>
+                                    <table
+                                        class="mx-auto max-w-4xl w-full whitespace-nowrap rounded-lg overflow-hidden sm:shadow-lg">
+                                        <thead class="bg-gray-50 dark:bg-gray-700">
+                                            <tr>
+                                                <th
+                                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    Name</th>
+                                                <th
+                                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    Title</th>
+                                                <th
+                                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    Status</th>
+                                                <th
+                                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    Role</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody
+                                            class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+                                            <tr>
+                                                <td
+                                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">
+                                                    John Doe</td>
+                                                <td
+                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                                                    CEO</td>
+                                                <td
+                                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-green-600 dark:text-green-400">
+                                                    Active</td>
+                                                <td
+                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                                                    Admin</td>
+                                            </tr>
+                                            <tr>
+                                                <td
+                                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">
+                                                    Jane Smith</td>
+                                                <td
+                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                                                    Manager</td>
+                                                <td
+                                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-yellow-600 dark:text-yellow-400">
+                                                    Pending</td>
+                                                <td
+                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                                                    Moderator</td>
+                                            </tr>
+                                            <tr>
+                                                <td
+                                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">
+                                                    Bob Johnson</td>
+                                                <td
+                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                                                    Developer</td>
+                                                <td
+                                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-red-600 dark:text-red-400">
+                                                    Inactive</td>
+                                                <td
+                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                                                    User</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="bg-white dark:bg-gray-800">
+                                        <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+                                            <div class="overflow-x-auto">
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <pre>
+                    <!-- <pre>
                             {{ serviceTypes }}
                         </pre>
                     <pre>
                             hi
                             {{ serviceRequests }}
-                        </pre>
+                        </pre> -->
                 </div>
             </div>
         </div>

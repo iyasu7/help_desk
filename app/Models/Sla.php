@@ -15,6 +15,14 @@ class Sla extends Model
         'description',
         'start_date',
         'expire_date',
+        'SLA_Status',
+        'sign',
         'file',
     ];
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }
+/**
+ * 
+ */

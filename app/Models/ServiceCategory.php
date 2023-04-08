@@ -19,4 +19,8 @@ class ServiceCategory extends Model
     {
         return $this->hasMany(ServiceType::class);
     }
+    
+    public function serviceRequest(){
+        return $this->hasMany(ServiceRequest::class);
+    }
 }

@@ -46,7 +46,7 @@
                                 class="py-3 px-4 bg-gray-700 dark:text-gray-300 block w-full border-2 border-gray-500 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 shadow-sm"
                                 id="lang">
                                 <option value="" disabled>Select Role</option>
-                                <option v-for="role in roles" :key="role.id" :value="role.id"
+                                <option v-for="role in roles" :key="role.id" :value="role.name"
                                     class="py-3 px-4 bg-gray-600 dark:text-gray-200 block w-full border-2 border-gray-500 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 shadow-sm">
                                     {{ role.name }}
                                 </option>
@@ -87,7 +87,7 @@ const form = reactive({
     email: '',
     password: '',
     password_confirmation: '',
-    role: null
+    role: ''
 })
 
 const { storeUser } = useUsers();

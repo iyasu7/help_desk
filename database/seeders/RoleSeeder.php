@@ -16,6 +16,5 @@ class RoleSeeder extends Seeder
         Role::create(['name' => 'admin','description' => 'controlles Every thing']);
         Role::create(['name' => 'techExpert','description' => 'controlles Everything except the admin']);
         Role::create(['name' => 'agent','description' => 'handles service requestes']);
-        Role::create(['name' => 'client','description' => 'create a service request with task need to be handeled and take Surveys']);
     }
 }

@@ -12,7 +12,7 @@ export default function useServiceRequests() {
         let res = await axiosClient.get("/serviceRequest");
         serviceRequests.value = res.data;
         console.log('serviceRequests');
-        console.log(res);
+        console.log(res.data);
     };
     //
     const getServiceRequest = async (id) => {

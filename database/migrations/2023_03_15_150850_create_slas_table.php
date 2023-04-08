@@ -10,16 +10,17 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+    
     public function up(): void
     {
         Schema::create('slas', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class, 'user_id');
             $table->string('main_consultant',45);
+            $table->text('customers_representative_name')->nullable();
             $table->text('description')->nullable();
             $table->string('file', 255)->nullable();
-            $table->text('customers_representative_name')->nullable();
-            $table->text('SLA_Status')->nullable();
+            $table->boolean('sign')->nullable();
             $table->date('start_date');
             $table->date('expire_date');
             $table->timestamps();

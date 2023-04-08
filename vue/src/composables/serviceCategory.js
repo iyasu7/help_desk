@@ -25,20 +25,21 @@ export default function useServiceCategories() {
         console.log("getserviceCategory from composables ; res");
         console.log(response);
          serviceCategory.value = await response.data.data;    
-    };
+    }; 
     const storeServiceCategory = async(data) => {
         // errors.value = ''
         // console.log('data');
         // console.log(data);
         // try {
-            axiosClient.post("/serviceCategory", data)
+            axiosClient.post("/serviceCategory/create", data)
             await router.push({name: 'ServiceCategoriesIndex'});
-        // } catch (e) {
-        //     if (e.response.status === 422) {
-        //         errors.value = e.response.data.errors
-        //     }
-        // }
+            // } catch (e) {
+                //     if (e.response.status === 422) {
+                    //         errors.value = e.response.data.errors
+                    //     }
+                    // }
     }
+    
     const updateServiceCategory = async (id) => {
         // errors.value = ''
         // try {

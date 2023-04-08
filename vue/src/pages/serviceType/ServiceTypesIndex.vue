@@ -39,9 +39,6 @@
                                             class="bg-gray-300  dark:bg-gray-800 dark:border-b dark:text-gray-400 dark:border-gray-200">
                                             <tr>
                                                 <th scope="col"
-                                                    class="w-1/12 px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
-                                                    Id</th>
-                                                <th scope="col"
                                                     class="w-1/4 px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
                                                     Service Category</th>
                                                 <th scope="col"
@@ -60,14 +57,9 @@
                                             <tr v-for="serviceType in serviceTypes" :key="serviceType.id"
                                                 class=" dark:bg-gray-700  dark:border-b dark:border-gray-400">
 
-                                                <td class="px-6 py-4 whitespace-nowrap ">
-                                                    <div class="flex items-center">
-                                                        {{ serviceType.id }}
-                                                    </div>
-                                                </td>
                                                 <td class="px-6 py-4 whitespace-nowrap dark:border-gray-400">
                                                     <div class="flex items-center">
-                                                        {{ serviceType.service_category_id }}
+                                                        {{ serviceType.serviceCategory.name }}
                                                     </div>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap dark:border-gray-400">
@@ -88,7 +80,7 @@
                                                                 :to="{ name: 'ServiceTypeEdit', params: { id: serviceType.id } }"
                                                                 class="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded-md">
                                                                 Edit</RouterLink>
-                                                                {{ serviceType.id }}
+                                                                <!-- {{ serviceType.id }} -->
                                                             <button @click="deleteServiceType(serviceType.id)"
                                                                 class="px-4 py-2 bg-red-500 hover:bg-red-700 text-white rounded-md">
                                                                 Delete

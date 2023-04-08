@@ -38,7 +38,7 @@ const routes = [
             { 
                 path: "users", name: "UsersIndex", component: UsersIndex 
             }, { 
-                path: "users/:id/edit", name: "UserEdit", component: UserEdit 
+                path: "users/:id/edit", name: "UserEdit", component: UserEdit ,props: true
             }, {
                 path: "users/create",name: "UserCreate",component: UserCreate,
             },

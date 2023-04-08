@@ -92,9 +92,9 @@ const form = reactive({
     description: ''
 })
 
-const { storeServiceType } = useServiceTypes();
 const { serviceCategories, getServiceCategories } = useServiceCategories();
 onMounted(getServiceCategories);
+const { storeServiceType } = useServiceTypes();
 
 
 

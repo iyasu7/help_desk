@@ -101,6 +101,8 @@ let errMsg = ref('');
 function login() {
 	store.dispatch('login', user)
 		.then(() => {
+			console.log('user current');
+			console.log(user);
 			router.push({
 				name: 'Dashboard'
 			})

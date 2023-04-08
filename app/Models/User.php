@@ -24,7 +24,6 @@ class User extends Authenticatable
         'email',
         'password',
         'email_verified_at',
-        'role',
     ];
 
     /**
@@ -38,6 +37,10 @@ class User extends Authenticatable
     ];
     public function serviceRequest(){
         return $this->hasMany(ServiceRequest::class);
+    }
+
+    public function slas(){
+        return $this->hasMany(Sla::class);
     }
 
     /**

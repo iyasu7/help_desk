@@ -1,7 +1,7 @@
 <template>
     <div class="py-12 w-full">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-2">
+            <div class="bg-white dark:bg-gray-600 overflow-hidden shadow-sm sm:rounded-lg p-2">
                 <div class="flex justifiy-start p-2">
                     <RouterLink :to="{ name: 'UsersIndex' }"
                         class="px-4 flex py-2 bg-green-500 hover:bg-green-700 rounded-md text-gray-800">
@@ -13,14 +13,14 @@
                         <span class="pl-1">Users</span>
                     </RouterLink>
                 </div>
-                <div class="flex flex-col p-2 bg-slate-100">
+                <div class="flex flex-col p-2 bg-slate-100 dark:bg-gray-600">
                     <div class="space-y-8 divide-y divide-gray-200 w-1/2 mt-6">
-                        <form @submit="saveUser">
+                        <form @submit.prevent="saveUser">
                             <div class="sm:col-span-6">
-                                <label for="name" class="block text-sm font-medium text-gray-700"> User name </label>
+                                <label for="name" class="block text-sm font-medium text-gray-700 mb-2 dark:text-gray-300"> User name </label>
                                 <div class="mt-1">
-                                    <input type="text" id="name" name="name" v-model="editUser.name"
-                                        class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                                    <input type="text" id="name" name="name" v-model="user.name"
+                                        class="block w-full appearance-none bg-white dark:bg-gray-600 border border-gray-900 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                                 </div>
 
                                 <!-- <span v-if="error" class="text-red-400 text-sm">{{ $message }}</span> -->
@@ -33,7 +33,40 @@
                         </form>
                     </div>
                 </div>
-                <div class="mt-6 p-2 bg-slate-100">
+                <div class="mt-6 p-2 bg-slate-100 dark:bg-gray-600">
+                    <h2 class="text-2xl font-semibold">User Roles</h2>
+                    <div class="flex space-x-2 mt-4 p-2">
+                        <!-- <div v-if="user.permissions">
+                            <div v-for="user_permission in user.permissions">
+                                <button class="px-4 py-2 bg-red-500 hover:bg-red-700 text-white rounded-md"
+                                    @click="deletePermission(user.id, user_permission.id)">
+                                    {{ user_permission.name }}
+                                </button>
+                            </div>
+                        </div> -->
+                    </div>
+                    <div class="max-w-xl mt-6">
+                        <form @submit.prevent="assignRole">
+
+                            <div class="sm:col-span-6">
+                                <label for="role" class="block text-sm font-medium text-gray-700 mb-2 dark:text-gray-300">Roles</label>
+                                <select id="role" name="role" autocomplete="role-name"
+                                    class="mt-1 block w-full py-2 px-3 border border-gray-900 bg-white dark:bg-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    <option v-for="role in roles" :value="role.name">
+                                        {{ role.name }}
+                                    </option>
+                                </select>
+                            </div>
+
+                            <!-- <span v-if="" class="text-red-400 text-sm">{{ $message }}</span> -->
+
+                            <div class="sm:col-span-6 pt-5">
+                                <button class="px-4 py-2 bg-green-500 hover:bg-green-700 rounded-md">Assign</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="mt-6 p-2 bg-slate-100 dark:bg-gray-600">
                     <h2 class="text-2xl font-semibold">User Permissions</h2>
                     <div class="flex space-x-2 mt-4 p-2">
                         <!-- <div v-if="user.permissions">
@@ -49,11 +82,11 @@
                         <form @submit.prevent="assignPermission">
 
                             <div class="sm:col-span-6">
-                                <label for="permission" class="block text-sm font-medium text-gray-700">Permission</label>
+                                <label for="permission" class="block text-sm font-medium text-gray-700 mb-2 dark:text-gray-300">Permission</label>
                                 <select id="permission" name="permission" autocomplete="permission-name"
-                                    class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                    <option v-for="permission in permissions" :value="permission.name">
-                                        {{ $permission.name }}
+                                    class="mt-1 block w-full py-2 px-3 border border-gray-900 bg-white dark:bg-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    <option class="px-2 py-3" v-for="permission in permissions" :value="permission.name">
+                                        {{ permission.name }}
                                     </option>
                                 </select>
                             </div>
@@ -73,23 +106,34 @@
 
 <script setup>
 import useUsers from '../../composables/users';
+import useRoles from '../../composables/roles';
+import usePermissions from '../../composables/permissions';
 import { onMounted,ref } from 'vue';
 import { useRoute } from 'vue-router';
 const { errors, user, users, getUser, updateUser } = useUsers();
+const { role, roles, getRoles, getRole} = useRoles();
+const {permissions, getPermissions} = usePermissions();
 
 const props = defineProps(['id']);
-const route = useRoute();
+// const route = useRoute();
 
-const userId = route.params.id;
-const editUser = ref({});
+// const userId = route.params.id;
+// const editUser = ref({});
 
-editUser.value = users.value.filter((user)=>{
-    user.id === userId;
-})
+// editUser.value = users.value.filter((user)=>{
+//     user.id === userId;
+// })
 
 
 
-    onMounted(getUser(props.id));
+    onMounted(()=>{
+        // console.log('props.id');
+        // console.log(props.id);
+        getUser(props.id)
+        getRoles();
+        getPermissions();
+
+    });
 
     const saveUser = async () => {
         user.value = editUser.value;

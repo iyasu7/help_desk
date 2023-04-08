@@ -17,7 +17,9 @@ class ServiceTypeController extends Controller
      */
     public function index()
     {
-        return ServiceTypeResource::collection(ServiceType::all());
+        $serviceType = ServiceType::with('serviceCategory')->get();
+        // Log::info($serviceType);
+        return ServiceTypeResource::collection($serviceType);
     }
 
     /**

@@ -6,14 +6,15 @@ export default function useServiceTypes() {
     const serviceTypes = ref([]); 
     const serviceType = ref([]);
     const typeByCategory = ref([]);
+    const errors = ref([]);
     
     const router = useRouter()
     
     const getServiceTypes = async () => {
         let res = await axiosClient.get("/serviceType");
         serviceTypes.value = res.data.data;
-        // console.log('serviceTypes');
-        // console.log(res.data.data);
+        console.log('serviceTypes');
+        console.log(res.data.data);
     };
     //
     const getServiceType = async (id) => {
@@ -45,9 +46,11 @@ export default function useServiceTypes() {
     }
     const updateServiceType = async (id) => {
         errors.value = ''
+        console.log('serviceType');
+        console.log(serviceType.value);
         try {
             await axiosClient.put('/serviceType/update/' + id, serviceType.value)
-            await router.push({name: 'ServiceTypesIndex'});
+            // await router.push({name: 'ServiceTypesIndex'});
         } catch (e) {
             if (e.response.status === 422) {
                 errors.value = e.response.data.errors

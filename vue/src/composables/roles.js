@@ -18,13 +18,11 @@ export default function useRoles() {
     };
     //
     const getRole = async (id) => {
-        console.log('id');
-        console.log(id);
         let response = await axiosClient.get("/roles/show/" + id);
         console.log("getPermisson from composables ; res");
-        console.log(response.data.permissions);
-        role.value = response.data.returnedRole;    
-        rolePermissions.value = response.data.permissions;    
+        console.log(response.data);
+        role.value = response.data;    
+        // rolePermissions.value = response.data.permissions;    
     };
     const storeRole = async(data) => {
         // errors.value = ''
@@ -64,7 +62,7 @@ export default function useRoles() {
     return {
         errors,
         role,
-        rolePermissions,
+        // rolePermissions,
         roles,
         getRole,
         getRoles,

@@ -19,25 +19,24 @@ class RoleController extends Controller
      */
     public function index()
     {
-        return Role::whereNotIn('name', ['admin'])->get();
+        $roles = Role::with('permissions')->get();
+        Log::info($roles);
+        return response()->json($roles);
+        // return Role::whereNotIn('name', ['admin'])->get();
     }
 
     public function show($id)
     {
-        // Log::info('$id');
-        // dd($id);
-        $role = Role::find($id);
-        Log::info('$role show');
+        $role = Role::with('permissions')->findOrFail($id);
+
+        // $permissions = $role->permissions();
+        Log::info('role');
         Log::info($role);
 
-        $returnedRole = new RoleResource($role);
+        // $returnedRole = new RoleResource($role);
 
-        $permissions = $role->permissions();
-
-        return response()->json(['returnedRole'=>$returnedRole,'permissions'=>$permissions]);
-        // return  with('returnedRole', $role)->with('permissions',$permissions);
-        // return new RoleResource($role);
-        // return 1;
+        return response()->json($role);
+        // return response()->json(['returnedRole'=>$returnedRole,'permissions'=>$permissions]);
     }
 
     // public function edit(Role $role)
@@ -66,8 +65,7 @@ class RoleController extends Controller
         // $validated = $request->validate(['name' => ['required', 'min:3']]);
         // $role = Role
         $validated = $request->validated();
-        $role = Role::create(['name' => $validated['name'],'description' => $validated['description']]);
-        
+        $role = Role::create(['name' => $validated['name'], 'description' => $validated['description']]);
     }
 
     // public function edit(Role $role)
@@ -75,7 +73,7 @@ class RoleController extends Controller
     //     $permissions = Permission::all();
     // }
 
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
         $role = Role::find($id);
         $validated = $request->validate(['name' => ['required', 'min:3']]);
@@ -96,20 +94,18 @@ class RoleController extends Controller
         Log::info($request);
         if ($role->hasPermissionTo($request->permission)) {
             return response()->with([
-                'message'=>'permission already assigned',
+                'message' => 'permission already assigned',
             ]);
         }
         $this->validate($request, [
             'name' => 'required|unique:roles|max:10',
             'permission' => 'required'
-          ]);
+        ]);
 
-        foreach($request['permission'] as $permission)
-        {
-          if($p = Permission::where('id', '=', $permission)->first())
-          {
-            $role->givePermissionTo($p);
-          }
+        foreach ($request['permission'] as $permission) {
+            if ($p = Permission::where('id', '=', $permission)->first()) {
+                $role->givePermissionTo($p);
+            }
         }
         // $role->givePermissionTo($request->permission);
     }

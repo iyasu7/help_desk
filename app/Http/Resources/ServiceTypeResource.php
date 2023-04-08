@@ -19,6 +19,7 @@ class ServiceTypeResource extends JsonResource
             'service_category_id'=> $this->service_category_id,
             'name'=>  $this->name,
             'description'=>  $this->description,
+            'serviceCategory'=>  $this->serviceCategory,
         ];
     }
 }

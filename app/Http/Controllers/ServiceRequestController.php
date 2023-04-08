@@ -17,9 +17,10 @@ class ServiceRequestController extends Controller
      */
     public function index()
     {
-        Log::info('ServiceRequest');
-        Log::info(ServiceRequest::all());
-        return ServiceRequest::all();
+        // Log::info('ServiceRequest');
+        $serviceRequest = ServiceRequest::with('user','serviceCategory','serviceType')->get();
+        Log::info(ServiceRequest::with(['user','serviceCategory','serviceType'])->get());
+        return response()->json($serviceRequest);
     }
     // public function add(Request $request)
     // {

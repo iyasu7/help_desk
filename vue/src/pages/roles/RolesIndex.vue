@@ -38,9 +38,6 @@
                                             class="bg-gray-300  dark:bg-gray-800 dark:border-b dark:text-gray-400 dark:border-gray-200">
                                             <tr>
                                                 <th scope="col"
-                                                    class="w-1/12 px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
-                                                    Id</th>
-                                                <th scope="col"
                                                     class="w-1/4 px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
                                                     Name</th>
                                                 <th scope="col"
@@ -56,11 +53,6 @@
                                             <tr v-for="role in roles" :key="role.id"
                                                 class=" dark:bg-gray-700  dark:border-b dark:border-gray-400">
 
-                                                <td class="px-6 py-4 whitespace-nowrap ">
-                                                    <div class="flex items-center">
-                                                        {{ role.id }}
-                                                    </div>
-                                                </td>
                                                 <td class="px-6 py-4 whitespace-nowrap dark:border-gray-400">
                                                     <div class="flex items-center">
                                                         {{ role.name }}

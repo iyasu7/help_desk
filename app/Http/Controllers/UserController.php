@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Log;
 use App\Http\Resources\UserResource;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\RegisterRequest;
 use Spatie\Permission\Models\Permission;
@@ -16,26 +17,37 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        $result = [];
-        $result = array();
+        // $result = [];
+        // $result = array();
         foreach ($users as $user) {
             // array_push($result,$user->getRoleNames());
             $user->getRoleNames();
             // $result->array_push
             $role = $user->getRoleNames();
-            Log::info($role);
+            // Log::info($role);
         }
-        Log::info('roles');
+        // Log::info('roles');
         // Log::info($result);
         return UserResource::collection(User::all());
     }
 
-    public function show(User $user)
+    public function current()
     {
-        $roles = Role::all();
-        $permissions = Permission::all();
+        $user = Auth::User();
+        return $user;
+    }
 
-        return compact('user', 'roles', 'permissions');
+    public function show($id)
+    {
+        $user = User::find($id);
+        Log::info("user show");
+        Log::info($user);
+        // $roles = Role::all();
+        $roles = $user->getRoleNames();
+        $permissions = $user->getAllPermissions();
+        // $permissions = Permission::all();
+
+        return compact("user", "roles", "permissions");
     }
     public function store(RegisterRequest $request)
     {
@@ -44,9 +56,9 @@ class UserController extends Controller
         $data['password'] = Hash::make($data['password']);
         // $data.push('email_verified_at'] = now();
         $data['email_verified_at'] = now();
-        $roleId = $data['role'];
-        $roleName = Role::find($roleId);
-        $user = User::create($data)->assignRole($roleName->name);
+        $roleName = $data['role'];
+        // $roleName = Role::find($roleId);
+        $user = User::create($data)->assignRole($roleName );
 
         return ([
             'user' => $user,

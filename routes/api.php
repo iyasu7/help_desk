@@ -39,8 +39,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::prefix('users')->group(function () {
         Route::get('/', [UserController::class, 'index']);
         Route::post('create', [UserController::class, 'store']);
-        Route::get('show/{user}', [UserController::class, 'show']);
-        Route::put('update/{user}', [UserController::class, 'update']);
+        Route::get('current', [UserController::class, 'show']);
+        Route::get('show/{id}', [UserController::class, 'show']);
+        Route::put('update/{id}', [UserController::class, 'update']);
         Route::delete('delete/{id}', [UserController::class, 'destroy']);
         Route::get('agents',[UserController::class,'roleUsers']);
     });
